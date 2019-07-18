@@ -94,3 +94,38 @@ class DeleteTest(APITestCase):
     def test_delete_error(self):
         response = self.client.delete('/2/', self.data)
         self.assertEqual(404, response.status_code)
+
+
+class PageSize2Test(APITestCase):
+    def setUp(self):
+        self.data = {
+            "nome": "2",
+            "canal": "celular",
+            "valor": "1",
+            "obs": "1",
+        }
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+        self.client.post('/', self.data, format='json')
+
+
+    def test_page_size(self):
+        """The first page with size 3 must return 3 results """
+        response = self.client.get('/?page=1&size=3')
+        self.assertEqual(3, len(response.data['results']))
+
+    def test_default_page_size(self):
+        """The first page must be size 10"""
+        response = self.client.get('/')
+        self.assertEqual(10, len(response.data['results']))
