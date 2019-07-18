@@ -46,7 +46,7 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ],
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
-    #'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
+    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
     'DEFAULT_PAGINATION_CLASS': 'agenda.core.api.pagination.StandardResultsSetPagination',
 }
 
